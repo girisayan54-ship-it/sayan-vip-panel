@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SAYAN VIP PANEL</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  height:100vh;
+  background:url("https://images.unsplash.com/photo-1501785888041-af3ef285b470")
+  no-repeat center/cover;
+  color:#fff;
+  position:relative;
+}
+
+/* ===== 3 DOT MENU ===== */
+.menu{
+  position:absolute;
+  top:15px;
+  right:15px;
+  font-size:26px;
+  cursor:pointer;
+}
+
+.menu-box{
+  display:none;
+  position:absolute;
+  top:50px;
+  right:15px;
+  background:#020617;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 0 10px #000;
+  z-index:10;
+}
+
+.menu-box div{
+  padding:12px 16px;
+  cursor:pointer;
+  border-bottom:1px solid #1e293b;
+}
+
+.menu-box div:hover{
+  background:#0ea5e9;
+}
+
+/* ===== TEXT ===== */
+.vip-text{
+  position:absolute;
+  bottom:40px;
+  width:100%;
+  text-align:center;
+  font-size:42px;
+  font-weight:bold;
+}
+
+/* ===== LOGIN BOX ===== */
+.login-box{
+  width:360px;
+  padding:30px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+  border-radius:12px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+.login-box h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.input-box{
+  position:relative;
+}
+
+.login-box input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid #fff;
+  color:#fff;
+  outline:none;
+}
+
+.eye{
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+}
+
+.login-box button{
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  border:none;
+  background:#0f2a3f;
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.change-btn{
+  background:#1b4f72;
+}
+
+#msg{
+  text-align:center;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 3 DOT MENU -->
+<div class="menu" onclick="toggleMenu()">⋮</div>
+<div class="menu-box" id="menuBox">
+  <div onclick="about()">About</div>
+  <div onclick="update()">Check Update</div>
+  <div onclick="exitApp()">Exit</div>
+</div>
+
+<div class="vip-text">
+  <h1>SAYAN VIP PANEL</h1>
+  Version 1.0
+</div>
+
+<div class="login-box">
+  <h2>Login</h2>
+
+  <input type="email" id="email" placeholder="Email">
+
+  <div class="input-box">
+    <input type="password" id="password" placeholder="Password">
+    <span class="eye" onclick="togglePassword()">👁️</span>
+  </div>
+
+  <p id="msg"></p>
+
+  <button onclick="login()">Login</button>
+  <button class="change-btn" onclick="changePassword()">Change Password</button>
+</div>
+
+<script>
+/* ===== DEFAULT DATA ===== */
+if(!localStorage.getItem("vipPassword")){
+  localStorage.setItem("vipPassword","123");
+}
+if(!localStorage.getItem("vipPin")){
+  localStorage.setItem("vipPin","9999");
+}
+
+/* ===== PASSWORD TOGGLE ===== */
+function togglePassword(){
+  let p=document.getElementById("password");
+  p.type = p.type==="password" ? "text" : "password";
+}
+
+/* ===== LOGIN ===== */
+function login(){
+  let email=document.getElementById("email").value.trim();
+  let pass=document.getElementById("password").value.trim();
+  let msg=document.getElementById("msg");
+
+  if(email==="SAYANI@GIMAL.COM" && pass===localStorage.getItem("vipPassword")){
+    msg.style.color="lightgreen";
+    msg.innerHTML="Login Successful ✔️";
+    setTimeout(()=>{
+      window.open("https://t.me/+919332412579","_blank");
+    },1200);
+  }else{
+    msg.style.color="red";
+    msg.innerHTML="Wrong Email or Password ❌";
+  }
+}
+
+/* ===== CHANGE PASSWORD ===== */
+function changePassword(){
+  let pin=prompt("Enter Security PIN:");
+  if(pin===localStorage.getItem("vipPin")){
+    let newPass=prompt("Enter New Password:");
+    if(newPass){
+      localStorage.setItem("vipPassword",newPass);
+      alert("Password Changed Successfully ✅");
+    }
+  }else{
+    alert("Wrong PIN ❌");
+  }
+}
+
+/* ===== MENU FUNCTIONS ===== */
+function toggleMenu(){
+  let m=document.getElementById("menuBox");
+  m.style.display = (m.style.display==="block") ? "none" : "block";
+}
+
+function about(){
+  alert("SAYAN VIP PANEL\nVersion 1.0");
+}
+
+function update(){
+  alert("No update available");
+}
+
+function exitApp(){
+  alert("Thanks for using app");
+}
+</script>
+
+</body>
+</html>
