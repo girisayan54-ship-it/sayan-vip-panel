@@ -130,6 +130,7 @@ body{
 <div class="menu" onclick="toggleMenu()">⋮</div>
 <div class="menu-box" id="menuBox">
   <div onclick="about()">About</div>
+  <div onclick="shareApp()">Share</div>
   <div onclick="update()">Check Update</div>
   <div onclick="exitApp()">Exit</div>
 </div>
@@ -199,6 +200,21 @@ function changePassword(){
     }
   }else{
     alert("Wrong PIN ❌");
+  }
+}
+
+/* ===== SHARE APP ===== */
+function shareApp(){
+  const data={
+    title:"SAYAN VIP PANEL",
+    text:"🔥 SAYAN VIP PANEL – Secure VIP Login App\nTry now!",
+    url:window.location.href
+  };
+
+  if(navigator.share){
+    navigator.share(data);
+  }else{
+    alert("Share not supported in this browser");
   }
 }
 
